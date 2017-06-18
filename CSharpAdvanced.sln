@@ -193,6 +193,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13.MagicExchangeableWords",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14.LettersChangeNumbers", "08.ManualStringProcessingExercise\14.LettersChangeNumbers\14.LettersChangeNumbers.csproj", "{F959ABB2-C205-4F12-A375-63F411504C88}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15.MelrahShake", "08.ManualStringProcessingExercise\15.MelrahShake\15.MelrahShake.csproj", "{0B0D5431-2A7D-49A4-9185-6F7EBB18249D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -535,6 +537,10 @@ Global
 		{F959ABB2-C205-4F12-A375-63F411504C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F959ABB2-C205-4F12-A375-63F411504C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F959ABB2-C205-4F12-A375-63F411504C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B0D5431-2A7D-49A4-9185-6F7EBB18249D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B0D5431-2A7D-49A4-9185-6F7EBB18249D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B0D5431-2A7D-49A4-9185-6F7EBB18249D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B0D5431-2A7D-49A4-9185-6F7EBB18249D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -624,5 +630,6 @@ Global
 		{469CAD69-7C1B-4608-B2B6-DCB0E9F3F3EB} = {B6F2A440-1F29-49E6-AD9D-97424FD211B0}
 		{9B1BE015-EBE0-46D8-AA5F-CB7DCE1BA2D4} = {B6F2A440-1F29-49E6-AD9D-97424FD211B0}
 		{F959ABB2-C205-4F12-A375-63F411504C88} = {B6F2A440-1F29-49E6-AD9D-97424FD211B0}
+		{0B0D5431-2A7D-49A4-9185-6F7EBB18249D} = {B6F2A440-1F29-49E6-AD9D-97424FD211B0}
 	EndGlobalSection
 EndGlobal
