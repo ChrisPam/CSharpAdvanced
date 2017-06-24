@@ -6,51 +6,59 @@ public class Program
 {
     public static void Main()
     {
-        var n = int.Parse(Console.ReadLine());
-        Dictionary<string, int> names = new Dictionary<string, int>();
+        int n = int.Parse(Console.ReadLine());
+        Dictionary<string, int> people = new Dictionary<string, int>();
         for (int i = 0; i < n; i++)
         {
-            var row = Console.ReadLine()
-                .Split(new char[] { ',', ' ' },
-                StringSplitOptions.RemoveEmptyEntries);
-            var name = row[0];
-            var age = row[1];
-            names[name] = int.Parse(age);
+            var input = Console.ReadLine().Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+            var name = input[0];
+            var age = input[1];
+
+            people[name] = int.Parse(age);
         }
-
-        var result = new Dictionary<string, int>();
-
         var condition = Console.ReadLine();
-        var delimiterAge = int.Parse(Console.ReadLine());
+        var sortAge = int.Parse(Console.ReadLine());
+        var filtered = FilterPeople(people, condition, sortAge);
         var format = Console.ReadLine();
-
-        Func<int, bool> tester = CreateTester(condition, age);
-        Action<KeyValuePair<string, int>> printer = CreatePrinter(format);
-        PrintFilteredStudent(people, tester, printer);
+        DisplayPeople(filtered, format);
     }
 
-    public static Func<int, bool> CreateTester(string condition, int age)
+    private static void DisplayPeople(Dictionary<string, int> filtered, string format)
     {
-        switch (condition)
+        if(format.Split(' ').Length == 2)
         {
-            case "younger": return x => x < age;
-            case "older": return x => x > age;
-            default: return null;
+            foreach (var person in filtered)
+            {
+                Console.WriteLine($"{person.Key} - {person.Value}");
+            }
+        }
+        else if(format.Split(' ')[0] == "name")
+        {
+            foreach (var person in filtered)
+            {
+                Console.WriteLine($"{person.Key}");
+            }
+        }
+        else if(format.Split(' ')[0] == "age")
+        {
+            foreach (var person in filtered)
+            {
+                Console.WriteLine($"{person.Value}");
+            }
         }
     }
 
-    public static Action<KeyValuePair<string, int>> CreatePrinter(string format)
+    private static Dictionary<string, int> FilterPeople(Dictionary<string, int> people, string condition, int sortAge)
     {
-        switch (format)
+        if (condition == "older")
         {
-            case "name":
-                return person => Console.WriteLine($"{person.Key}");
-            case "age":
-                return person => Console.WriteLine($"{person.Value}");
-            case "name age":
-                return person =>
-                Console.WriteLine($"{person.Key} – {person.Value}");
-            default: return null;
+            people = people.Where(p => p.Value >= sortAge).ToDictionary(p => p.Key, p => p.Value);
         }
+        else if (condition == "younger")
+        {
+            people = people.Where(p => p.Value <= sortAge).ToDictionary(p => p.Key, p => p.Value);
+        }
+
+        return people;
     }
 }
