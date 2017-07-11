@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEB06E4E-253A-4383-A6D4-58D30204DFD0}</ProjectGuid>
+    <ProjectGuid>{082D6D39-439D-4E04-A748-0826EFE3B206}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_04.Hospital</RootNamespace>
-    <AssemblyName>04.Hospital</AssemblyName>
+    <RootNamespace>_02.BePositive</RootNamespace>
+    <AssemblyName>02.BePositive</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

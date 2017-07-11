@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{CEB06E4E-253A-4383-A6D4-58D30204DFD0}</ProjectGuid>
+    <ProjectGuid>{FB9776EC-FBA9-4AB0-AE23-C51F8FAE4F94}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>_04.Hospital</RootNamespace>
-    <AssemblyName>04.Hospital</AssemblyName>
+    <RootNamespace>_06TruckTour</RootNamespace>
+    <AssemblyName>06TruckTour</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
