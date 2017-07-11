@@ -1,82 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
-public class LegendaryFarming
+//09. Legendary Farming
+namespace LegendaryFarming
 {
-    public static void Main()
+    class LegendaryFarming
     {
-        var specialResources = new Dictionary<string, int>();
-        var junkResources = new Dictionary<string, int>();
-        while (true)
+        static void Main(string[] args)
         {
-            var input = Console.ReadLine().Split(' ');
-            for (int i = 0; i < input.Length - 1; i += 2)
+            SortedDictionary<string, int> keyItems = new SortedDictionary<string, int> { { "shards", 0 }, { "fragments", 0 }, { "motes", 0 } };
+            SortedDictionary<string, int> junkItems = new SortedDictionary<string, int>();
+
+            bool hasLegendary = false;
+
+            while (hasLegendary == false)
             {
-                var quantity = int.Parse(input[i]);
-                var resource = input[i + 1].ToLower();
-
-                var motes = 0;
-                var fragments = 0;
-                var shards = 0;
-
-                if (resource == "motes" || resource == "fragments" || resource == "shards")
+                string loot = Console.ReadLine().ToLower();
+                SortItems(loot, keyItems, junkItems);
+                if (keyItems.Values.Max() >= 250)
                 {
-                    if(resource == "motes")
-                    {
-                        motes += quantity;
-                    }
-                    else if(resource == "fragments")
-                    {
-                        fragments += quantity;
-                    }
-                    else if(resource == "shards")
-                    {
-                        shards += quantity;
-                    }
+                    hasLegendary = true;
+                    break;
+                }
+            }
+            Results(keyItems, junkItems);
+        }
+
+        private static void Results(SortedDictionary<string, int> keyItems, SortedDictionary<string, int> junkItems)
+        {
+            string legendary = keyItems.Aggregate((comparison, current) => comparison.Value > current.Value ? comparison : current).Key;
+
+            switch (legendary)
+            {
+                case "shards":
+                    Console.WriteLine("Shadowmourne obtained!");
+                    keyItems[legendary] -= 250;
+                    PrintRest(keyItems, junkItems);
+                    break;
+                case "fragments":
+                    Console.WriteLine("Valanyr obtained!");
+                    keyItems[legendary] -= 250;
+                    PrintRest(keyItems, junkItems);
+                    break;
+                case "motes":
+                    Console.WriteLine("Dragonwrath obtained!");
+                    keyItems[legendary] -= 250;
+                    PrintRest(keyItems, junkItems);
+                    break;
+            }
+        }
+
+        private static void PrintRest(SortedDictionary<string, int> keyItems, SortedDictionary<string, int> junkItems)
+        {
+            foreach (KeyValuePair<string, int> leftOverKeyitems in keyItems.OrderByDescending(x => x.Value))
+            {
+                Console.WriteLine($"{leftOverKeyitems.Key}: {leftOverKeyitems.Value}");
+            }
+
+            foreach (KeyValuePair<string, int> leftOverJunkItems in junkItems)
+            {
+                Console.WriteLine($"{leftOverJunkItems.Key}: {leftOverJunkItems.Value}");
+            }
+        }
+
+        private static void SortItems(string loot, SortedDictionary<string, int> keyItems, SortedDictionary<string, int> junkItems)
+        {
+            List<string> farmedItems = loot.Split().ToList();
+
+            for (int i = 0; i < farmedItems.Count; i += 2)
+            {
+                int itemQuantity = int.Parse(farmedItems[i]);
+                string item = farmedItems[i + 1];
+
+                if (item == "shards" || item == "fragments" || item == "motes")
+                {
+                    AddToKeyItems(keyItems, item, itemQuantity);
                 }
                 else
                 {
-                    if (!junkResources.ContainsKey(resource))
-                    {
-                        junkResources[resource] = 0;
-                    }
-                    junkResources[resource] += quantity;
+                    AddToJunkItems(junkItems, item, itemQuantity);
                 }
-
-                if (motes >= 250)
+                if (keyItems.Values.Max() >= 250)
                 {
-                    Console.WriteLine("Dragonwrath obtained!");
-                    specialResources["motes"] -= 250;
-                    PrintResources(specialResources.OrderByDescending(x => x.Value).ThenBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
-                    PrintResources(junkResources.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
-                    return;
-                }
-                else if (fragments >= 250)
-                {
-                    Console.WriteLine("Valanyr obtained!");
-                    specialResources["fragments"] -= 250;
-                    PrintResources(specialResources.OrderByDescending(x => x.Value).ThenBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
-                    PrintResources(junkResources.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
-                    return;
-                }
-                else if (shards >= 250)
-                {
-                    Console.WriteLine("Shadowmourne obtained!");
-                    specialResources["shards"] -= 250;
- 
-                    PrintResources(junkResources.OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value));
-                    return;
+                    break;
                 }
             }
         }
-    }
 
-    public static void PrintResources(Dictionary<string, int> resources)
-    {
-        foreach (var resource in resources)
+        private static void AddToJunkItems(SortedDictionary<string, int> junkItems, string item, int itemQuantity)
         {
-            Console.WriteLine($"{resource.Key}: {resource.Value}");
+            if (junkItems.ContainsKey(item))
+            {
+                junkItems[item] += itemQuantity;
+            }
+            else
+            {
+                junkItems.Add(item, itemQuantity);
+            }
+        }
+
+        private static void AddToKeyItems(SortedDictionary<string, int> keyItems, string item, int itemQuantity)
+        {
+            if (keyItems.ContainsKey(item))
+            {
+                keyItems[item] += itemQuantity;
+            }
+            else
+            {
+                keyItems.Add(item, itemQuantity);
+            }
         }
     }
 }
